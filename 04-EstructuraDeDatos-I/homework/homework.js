@@ -14,23 +14,72 @@ Secuencia:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
 Como ejercicio adicional y completamente opcional, al terminar de resolver este problema pueden intentar definir funciones que logren los mismos resultados pero de manera iterativa.
 */
 
+//Factorial de un numero
+//5! = 5*4!=5*4*3!=5*4*3*2!=5*4*3*2*1!
+//1!=1 este es mi condicion de corte
+//0!= 1
 function nFactorial(n) {
+  if (n === 1) return 1;
+  if (n === 0) return 1;
+  if (n < 0) return 0;
+
+  return nFactorial(n - 1) * n;
 }
+//Formula Fibonacci F(n) = F(n - 1)+ F(n - 2)
+// F(0) = 0 , F(1) = 1 y F(-n) = 0  Estas son nuestras condiciones
+// F(5) = F(4) + F(3)
+//      = F(3) + F(2) + F(2) + F(1)
+//      = F(2) + F(1) + F(1) + F(0) + F(1) + F(0) + 1
+//      = F(1) + F(0) + 1 + 1 + 0 + 1 + 0 + 1
+//      =   1  +   0  + 4
+//      =  5
 
 function nFibonacci(n) {
+  if (n === 1) return 1;
+  if (n === 0) return 0;
+  if (n < 0) return 0;
+
+  return nFibonacci(n - 1) + nFibonacci(n - 2);
 }
 
 /*
 Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde el primer elemento que ingresa es el primero que se quita. Definir los siguientes métodos:
-  - enqueue: agrega un valor respetando el orden.
-  - dequeue: remueve un valor respetando el orden. Retorna undefined cuando la queue está vacía.
+  - enqueue: agrega un elem respetando el orden.
+  - dequeue: remueve un elem respetando el orden. Retorna undefined cuando la queue está vacía.
   - size: retorna el tamaño (cantidad de elementos) de la queue.
+  
+  Pueden utilizar class o función constructora.
+  */
+ 
+ /*-----Variable acumulador para llevar la cantidad de 
+ elementos que hay en la fila----------*/
+ var tamaño = 0;
 
-Pueden utilizar class o función constructora.
-*/
-
-function Queue() {
-
+/*Planteamos nuestra classe*/
+class Queue {
+  constructor() {
+    this.fila = []; //propiedad fila 
+  }
+  /*------Metodo que agrega elementos a la fila y aumenta
+  el acumulador por cada elemento-------*/
+  enqueue(elem) {
+    this.fila.push(elem);
+    tamaño++;
+  }
+  /*-----Metodo que remueve elementos de la fila y disminuye
+  el acumulador por cada elemento------*/
+  dequeue(elem) {
+    if (this.fila === null) { return undefined; }
+    else {
+      tamaño--;
+      return this.fila.shift(elem);
+    }
+  }
+  /*-----Metodo que retorna la cantidad de elementos en la
+  fila------*/
+  size() {
+    return this.fila.length;
+  }
 }
 
 // No modifiquen nada debajo de esta linea
