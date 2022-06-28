@@ -8,7 +8,7 @@ function BinarioADecimal(num) {
   for (let i = num.length-1; i >=0; i--) {
 
       numDecimal += parseInt(num[i])*(Math.pow(2,acum));
-      acum = acum + 1;
+      acum += + 1;
       //OTRA FORMA
       //numDecimal += Number(num[i])* Math.pow(2, acum++);
   }
@@ -26,7 +26,7 @@ function DecimalABinario(num) {
     cociente = Math.floor(cociente /2);// actualizamos el cociente siendo siempre un entero
   } while (cociente >= 1);// 
    
-   if(cociente === 1){ // Si al final de la divicion el cociente ===1
+   if(cociente === 1){ // Si al final de la divicion el cociente === 1
      binario.push(cociente.toString());// lo pusheamos transformandolo a string al array
    };
    
