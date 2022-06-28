@@ -19,7 +19,23 @@ function counter() {
   otroContador()      // 2
   otroContador()      // 3
    */
+
+  var contador = 0;
+
+  function otraFuncion() {
+    contador = contador + 1;
+    var numero = [];
+    for (let i = 1; i < 6; i++) {
+      numero.push(function (j) {
+        return j;
+      }(i));
+    }
+    return contador;
+  }
+
+  return otraFuncion;
 }
+
 
 function cacheFunction(cb) {
   /*
@@ -28,7 +44,6 @@ function cacheFunction(cb) {
   Tu tarea aquí es lograr, mediante un closure, que cacheFunction actúe como una memoria caché para el callback que recibe por parámetro (cb); es decir, que "recuerde" el resultado de cada operación que hace, de manera que, al realizar una operación por segunda vez, se pueda obtener el resultado de esa "memoria" sin tener que efectuar otra vez cálculos que ya se hicieron anteriormente.
 
   cacheFunction debe retornar una función. Esta función debe aceptar un argumento (arg) e invocar a cb con ese argumento; hecho eso, debe guardar el argumento junto con el resultado de la invocación (tip: usá un objeto donde cada propiedad sea el argumento, y su valor el resultado de la correspondiente invocación a cb) de manera que, la próxima vez que reciba el mismo argumento, no sea necesario volver a invocar a cb, porque el resultado estará guardado en la "memoria caché".
-
 
   Ejemplo:
   function square(n){
@@ -39,9 +54,31 @@ function cacheFunction(cb) {
 
   squareCache(5)    // invocará a square(5), almacenará el resultado y lo retornará
   squareCache(5)    // no volverá a invocar a square, simplemente buscará en la caché cuál es el resultado de square(5) y lo retornará (tip: si usaste un objeto, podés usar hasOwnProperty) 
-
   */
-}
+
+ var cache = {};
+  return function (arg){             
+    if(!cache.hasOwnProperty(arg)){ //si no esta la propiedad arg la creamos en el objeto cache, luego le 
+      cache[arg] = cb(arg); // pasamos arg al callback, este resuelve la operacion agregando el valor de arg.
+      return cache[arg]; // Aqui devolvemos el valor de la propiedad arg
+    }
+   return cache[arg];// si la propiedad ya esta creada retorna su valor
+  }
+  }
+
+  /*--------FUNCION CALLBACK-------
+  const cb = function(x) {
+    return x * 2;
+  }*/
+
+  /*--------INVOCAMOS function cacheFunction(arg){}----
+  var arg = '5'; 5 es el nombre de la propiedad y 10 sera su valor
+
+  var cacheOne = function cacheFunction(arg)
+     cacheOne(5); //10
+     cacheOne(2);// 4
+     cacheOne(5);//10 en este no hara la operacion de nuevo sino que ya queda en la cache
+   */
 
 // Bind
 
@@ -67,8 +104,9 @@ function getNombre() {
   Usando el método bind() guardar, en las dos variables declaradas a continuación, dos funciones que actúen como getNombre pero retornen el nombre del instructor y del alumno, respectivamente.
 */
 
-let getNombreInstructor;
-let getNombreAlumno;
+let getNombreInstructor = getNombre.bind(instructor);
+
+let getNombreAlumno = getNombre.bind(alumno);
 
 /*
   Ejercicio 4
@@ -80,9 +118,10 @@ function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
   return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
 
-let textoAsteriscos;
-let textoGuiones;
-let textoUnderscore;
+let textoAsteriscos = crearCadena.bind(this, '*', '*'); // se pueden colocar this
+let textoGuiones = crearCadena.bind(null, '-', '-');// se puede colocar null
+let textoUnderscore = crearCadena.bind(undefined, '_', '_');// se puede colocar undefined
+// ya que como no tenemos
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
