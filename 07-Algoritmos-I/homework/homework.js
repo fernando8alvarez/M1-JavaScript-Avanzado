@@ -55,7 +55,6 @@ function bubbleSort(array) {
   return array;
 }
 
-
 function insertionSort(array) {
   // Implementar el método conocido como insertionSort para ordenar de menor a mayor
   // el array recibido como parámetro utilizando arreglos
@@ -113,7 +112,6 @@ function selectionSort(array) {
     }
   }
 
-  
   return array;
 }
 
